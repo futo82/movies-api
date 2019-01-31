@@ -4,7 +4,6 @@ This example project demonstrates how to write a RESTful API in Golang using the
 
 ## Directory Structure
 
-## Structure
 ```
 ├── controllers
 │   └── controller.go   // Handle Requests
