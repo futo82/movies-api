@@ -19,6 +19,7 @@ This example project demonstrates how to write a RESTful API in Golang using the
 ├── docker-compose.yml  // Startup API & DyanmoDB Containers
 ├── Dockerfile          // Build API Docker Image
 └── run.sh
+```
 
 ## Prerequisites
 
