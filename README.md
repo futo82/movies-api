@@ -117,7 +117,6 @@ You will need to obtain an Okta access token and include it in the Authorization
 curl -X POST \
   https://{baseUrl}/api/v1/authn \
   -H 'Content-Type: application/json' \
-  -H 'cache-control: no-cache' \
   -d '{
   "username": "YOUR_USERNAME",
   "password": "YOUR_PASSWORD",
@@ -134,8 +133,7 @@ https://{baseUrl}/oauth2/default/v1/authorize endpoint.
 
 ```
 curl -X GET \
-  'https://{baseUrl}/oauth2/default/v1/authorize?client_id=YOUR_CLIENT_ID&response_type=token&scope=openid&redirect_uri={YOUR_REDIRECT_URI}&state=YOUR_STATE_VALUE&nonce=YOUR_NONCE_VALUE&sessionToken=YOUR_SESSION_TOKEN' \
-  -H 'cache-control: no-cache'
+  'https://{baseUrl}/oauth2/default/v1/authorize?client_id=YOUR_CLIENT_ID&response_type=token&scope=openid&redirect_uri=YOUR_REDIRECT_URI&state=YOUR_STATE_VALUE&nonce=YOUR_NONCE_VALUE&sessionToken=YOUR_SESSION_TOKEN'
 ```
 
 ## Build & Tag the API Docker Image
