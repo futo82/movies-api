@@ -70,6 +70,7 @@ curl -X POST \
 ```
 curl -X PUT \
   http://localhost:8080/v1/api/movies/19995 \
+  -H 'Authorization: Bearer JWT_OKTA_TOKEN' \
   -H 'Content-Type: application/json' \
   -d '{
 	"title": "Avatar",
@@ -86,7 +87,8 @@ curl -X PUT \
 
 ```
 curl -X DELETE \
-  http://localhost:8080/v1/api/movies/19995
+  http://localhost:8080/v1/api/movies/19995 \
+  -H 'Authorization: Bearer JWT_OKTA_TOKEN'
 ```
 
 ## Setup Environment
@@ -114,6 +116,10 @@ ISSUER=<YOUR_OKTA_ISSUER>
 ## Load Sample Data
 
 Run the load_data.sh script in the data directory to create the 'Movies' DynamoDB table and load 100 sample movies into the database.
+
+```
+./load_data.sh
+```
 
 ## Obtain an Okta Access Token
 
