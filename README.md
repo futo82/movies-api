@@ -1,12 +1,16 @@
 # Movies RESTful API
 
-This example project demonstrates how to write a RESTful API in Golang using the Gin framework. The API provides a create, retrieve, update, and delete operation against the movie data stored in DynamoDB. Okta's implicit flow is integrated to provide access control.
+This example project demonstrates how to write a RESTful API in Golang using the Gin framework. The API provides a create, retrieve, update, and delete service that is used to operate on the movie data stored in DynamoDB. Okta's implicit flow is integrated to provide access control.
 
 ## Directory Structure
 
 ```
 ├── controllers
 │   └── controller.go   // Handle Requests
+├── data
+│   └── load_data.go
+│   └── load_data.sh   // Script to load data into database  
+│   └── movies.csv     // Contains 100 movie record
 ├── db
 │   └── dyanmodb.go     // Intialize Database 
 ├── middlewares
@@ -107,7 +111,11 @@ CLIENT_ID=<YOUR_OKTA_APPLICATION_CLIENT_ID>
 ISSUER=<YOUR_OKTA_ISSUER>
 ```
 
-## Obtaining an Okta Access Token
+## Load Sample Data
+
+Run the load_data.sh script in the data directory to create the 'Movies' DynamoDB table and load 100 sample movies into the database.
+
+## Obtain an Okta Access Token
 
 You will need to obtain an Okta access token and include it in the Authorization header when sending in a request to the API.
 
@@ -142,15 +150,27 @@ curl -X GET \
 docker build . -t futo82/movies-api
 ```
 
-## Run API locally that connects to AWS DynamoDB
+## Run API locally and connect to AWS DynamoDB
 
 This requires that you have an AWS account and your AWS CLI is configured with an access key and secret key that has permission to access AWS DyanmoDB.
 
-Run the run.sh script and it will perform the following tasks.
+Run the run.sh script to startup the API.
 
 ```
-./run.sh
+#!/bin/bash
+
+AWS_ACCESS_KEY_ID=$(aws --profile default configure get aws_access_key_id)
+AWS_SECRET_ACCESS_KEY=$(aws --profile default configure get aws_secret_access_key)
+AWS_REGION=$(aws --profile default configure get region)
+CLIENT_ID=$(grep CLIENT .env | cut -d= -f2)
+ISSUER=$(grep ISSUER .env | cut -d= -f2)
+PORT=8080
+
+docker build . -t futo82/movies-api
+docker run -i -t -p 8080:8080 -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_REGION=$AWS_REGION -e CLIENT_ID=$CLIENT_ID -e ISSUER=$ISSUER -e PORT=$PORT futo82/movies-api
+
 ```
+The script will perform the following tasks.
 
 * Use the AWS CLI to extract out the access key, secret key, and region from the default profile and set them as environment variables. 
 * Extract out the Okta client id and issuer values from the .env file and set them as environment variables.
