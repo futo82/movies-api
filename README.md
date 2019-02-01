@@ -9,8 +9,8 @@ This example project demonstrates how to write a RESTful API in Golang using the
 │   └── controller.go   // Handle Requests
 ├── data
 │   └── load_data.go
-│   └── load_data.sh   // Script to load data into database  
-│   └── movies.csv     // Contains 100 movie record
+│   └── load_data.sh    // Script to load data into database  
+│   └── movies.csv      // Contains 100 movie record
 ├── db
 │   └── dyanmodb.go     // Intialize Database 
 ├── middlewares
