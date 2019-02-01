@@ -168,8 +168,8 @@ PORT=8080
 
 docker build . -t futo82/movies-api
 docker run -i -t -p 8080:8080 -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e AWS_REGION=$AWS_REGION -e CLIENT_ID=$CLIENT_ID -e ISSUER=$ISSUER -e PORT=$PORT futo82/movies-api
-
 ```
+
 The script will perform the following tasks.
 
 * Use the AWS CLI to extract out the access key, secret key, and region from the default profile and set them as environment variables. 
